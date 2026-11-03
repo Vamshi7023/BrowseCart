@@ -79,8 +79,14 @@ mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/shopexplore
 ### Render
 1. Push code to GitHub
 2. Connect Render to your repository
-3. Set environment variables in Render dashboard
-4. Deploy
+3. Configure the Web Service:
+   - **Root Directory:** `backend`
+   - **Build Command:** `npm install`
+   - **Start Command:** `npm start`
+4. In **Environment**, add `MONGODB_URI` with your MongoDB Atlas connection string. The backend also accepts `MONGO_URI` for compatibility with existing local `.env` files.
+5. Deploy. Render supplies `PORT` automatically; do not hardcode it.
+
+Keep connection strings and other credentials in Render's Environment settings, not in source code or committed files. `FRONTEND_URL` is currently only logged by the server; the custom CORS middleware that uses it is not enabled.
 
 ### Railway
 1. Install Railway CLI: `npm install -g @railway/cli`

@@ -2,7 +2,12 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb+srv://tsaditya35:sPSyEOnNHWFDBqc6@firstproj.9bglr.mongodb.net/TripSaga");
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+    if (!mongoUri) {
+      throw new Error("Missing MongoDB connection string. Set MONGODB_URI.");
+    }
+
+    await mongoose.connect(mongoUri);
     console.log("MongoDB Connected...");
   } catch (err) {
     console.error(err);

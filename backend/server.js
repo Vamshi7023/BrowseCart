@@ -1,4 +1,13 @@
-require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+const envPaths = [
+  path.resolve(__dirname, '.env'),
+  path.resolve(__dirname, '..', '.env')
+].filter((envPath) => fs.existsSync(envPath));
+
+require('dotenv').config({
+  path: envPaths.length ? envPaths : undefined
+});
 const express = require('express');
 const connectDB = require('./config/database');
 // const corsMiddleware = require('./middleware/cors');
@@ -9,7 +18,7 @@ const cors = require('cors');
 
 console.log('=== SERVER STARTUP ===');
 console.log('Environment variables loaded');
-console.log('MongoDB URI:', process.env.MONGODB_URI ? 'Set' : 'Not set');
+console.log('MongoDB URI:', process.env.MONGODB_URI || process.env.MONGO_URI ? 'Set' : 'Not set');
 
 // Connect to MongoDB
 connectDB();
