@@ -1,7 +1,7 @@
 
 import axios, { AxiosInstance } from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://browsecart-backend.onrender.com/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://browsecart-shld.onrender.com';
 
 export interface User {
   _id: string;
